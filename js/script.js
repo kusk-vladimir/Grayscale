@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
     const navInit = () => {
-        //изменение цвета фона меню
         const navbarCollapsible = document.body.querySelector('#mainNav');
         
         if (window.scrollY === 0 ) {
@@ -10,20 +9,17 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
 
-        const links = document.querySelectorAll('.nav-link'); //ищем все навигационные ссылки
-        const sections = document.querySelectorAll('section'); //ищем все секции
+        const links = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
 
 
 
-        sections.forEach(section =>{ // для каждой секции
-            if (window.scrollY >= (section.offsetTop - 100)) { // проверяем если страница прокручена больше
-                //чем растояние секции от начала страницы
-                //console.log(window.scrollY + " >= " + section.offsetTop + '' + section.id);
-                links.forEach(link => { //для каждой ссылки
-                    link.classList.remove('active') //удаляем активный класс
-                    if (link.href.split('#').pop() === section.id) { // проверяем если data-атрибут
-                        // console.log("I'm here");
-                        link.classList.add('active') // добавляем ссылке активный класс
+        sections.forEach(section =>{
+            if (window.scrollY >= (section.offsetTop - 100)) {
+                links.forEach(link => { 
+                    link.classList.remove('active')
+                    if (link.href.split('#').pop() === section.id) {
+                        link.classList.add('active')
                     }
                 })
             }
@@ -37,16 +33,15 @@ document.addEventListener('DOMContentLoaded', function(){
         return { top: rect.top + scrollTop, left: rect.left + scrollLeft};
     }
 
-    // анимация контента
+    
     const animItems = document.querySelectorAll('.animate');
     if (animItems.length > 0) {
         console.log('hello');
         function onEntry(params) {
             animItems.forEach(item => {
-                const itemHeight = item.offsetHeight; // высота анимируемого объекта
-                const itemOffset = offset(item).top // позиция объекта от верхнего края
-                const startPos = 2; // параметр регулирования старта анимации
-                // не window.innerWidth / innerHeight
+                const itemHeight = item.offsetHeight;
+                const itemOffset = offset(item).top
+                const startPos = 2;
                 const animPoint = document.documentElement.clientHeight - itemHeight / startPos;
 
                 if (itemHeight > document.documentElement.clientHeight) {
@@ -64,21 +59,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    /*function onEntry(entry) {
-        entry. forEach(change => {
-            if (change.isIntersecting) {
-                change.target.classList.add('show');
-            } else change.target.classList.remove('show');
-        });
-    }
-
-    let options = {threshold:[0.5]};
-    let observer = new IntersectionObserver(onEntry, options);
-    let elements = document.querySelectorAll('.animate');
-
-    for (let elm of elements) {
-        observer.observe(elm);
-    }*/
+   
 
     onEntry();
     navInit();

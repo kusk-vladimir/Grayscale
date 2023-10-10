@@ -1,19 +1,17 @@
-const modalLinks = document.querySelectorAll('.popup-link'); // объекты которые содержат внутри себя ссылки
-// на наши модалки
-const body = document.querySelector('body'); // будет блокировать скрипт под модалкой
-const blockPadding = document.querySelectorAll('.lock-padding');  // не дает контенту дергаться
-// при включении модалки
-let unblock = true; // блокирует двойные нажатия
-const timeout = 800; // таймаут равный времени анимации
+const modalLinks = document.querySelectorAll('.popup-link'); 
+const body = document.querySelector('body'); 
+const blockPadding = document.querySelectorAll('.lock-padding');
+let unblock = true; 
+const timeout = 800; 
 
 
-if (modalLinks.length > 0) { // проверка наличия на странице элементов которые вызывают модальные окна
+if (modalLinks.length > 0) { 
     modalLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const modalName = link.getAttribute('href').replace('#', '');
             const currentModal = document.getElementById(modalName);
             modalOpen(currentModal);
-            e.preventDefault(); // запрет на перезагрузку страницы при клике на ссылку
+            e.preventDefault(); 
         })
     })
 }
@@ -23,8 +21,8 @@ const modalCloseElem = document.querySelectorAll('.close-modal');
 if (modalCloseElem.length > 0) {
     modalCloseElem.forEach(el => {
         el.addEventListener('click', function(e) {
-            modalClose(el.closest('.popup')); // ближайший родитель закрывающегоэлемента
-            e.preventDefault(); // запрет на перезагрузку страницы при клике на ссылку
+            modalClose(el.closest('.popup')); 
+            e.preventDefault(); 
         })
     })
 }
